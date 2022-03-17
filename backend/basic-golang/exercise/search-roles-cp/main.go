@@ -61,4 +61,15 @@ func main() {
 	}
 
 	// TODO: answer here
+	var role string
+	fmt.Print("Masukan Role: ")
+	fmt.Scanf("%s", &role)
+
+	for _, v := range users {
+		if v.role == role {
+			fmt.Printf("Nama %s Age %d Role : %s", v.name, v.age, v.role)
+		} else {
+			fmt.Println()
+		}
+	}
 }

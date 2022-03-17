@@ -35,8 +35,16 @@ import (
 
 func main() {
 	var sizeQueue int
-	fmt.Printf("Masukkan jumlah antrian : ")
-	fmt.Scan(&sizeQueue)
+	fmt.Print("Size: ")
+	fmt.Scanf("%d", &sizeQueue)
 
-	// TODO: answer here
+	for  i := 1; i <= sizeQueue; i++ {
+		if i <= 5 {
+			fmt.Printf("Antrian %d membeli 1kg beras dengan kualitas [SUPER] \n", i)
+		} else if i >= 6 && i <= 10 {
+			fmt.Printf("Antrian %d membeli 1kg beras dengan kualitas [MEDIUM] \n", i)
+		} else {
+			fmt.Printf("Antrian %d membeli 1kg beras dengan kualitas [LOW] \n", i)
+		}
+	}
 }

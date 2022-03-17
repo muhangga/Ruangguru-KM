@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 // Check Point:
@@ -36,4 +35,64 @@ import (
 
 func main() {
 	// TODO: answer here
+	var choice int
+	var result float32
+
+	fmt.Println("1 : Rectange area")
+	fmt.Println("2 : Rectangular area")
+	fmt.Println("3 : Triangle area")
+	fmt.Println("4 : Circle area")
+
+	fmt.Printf("Masukan pilihan :")
+	fmt.Scan(&choice)
+
+	switch choice {
+	case 1:
+		var sisi float32
+
+		fmt.Printf("Masukan sisi :")
+		fmt.Scan(&sisi)
+
+		result = sisi * sisi
+		fmt.Printf("Luas Persegi adalah: %f", result)
+		break
+	case 2:
+		var p, l float32
+
+		fmt.Printf("Masukan panjang :")
+		fmt.Scan(&p)
+
+		fmt.Printf("Masukan lebar :")
+		fmt.Scan(&l)
+
+		result = p * l
+		fmt.Printf("Luas Persegi Panjang adalah: %f", result)
+		break
+
+	case 3:
+		var a, t float32
+
+		fmt.Printf("Masukan alas :")
+		fmt.Scan(&a)
+
+		fmt.Printf("Masukan tinggi :")
+		fmt.Scan(&t)
+
+		result = 0.5 * a * t
+		fmt.Printf("Luas Persegi Panjang adalah: %f", result)
+		break
+	case 4:
+		var r float32
+		const pi = 3.14
+
+		fmt.Printf("Masukan jari-jari :")
+		fmt.Scan(&r)
+
+		result = pi * r * r
+		fmt.Printf("Luas lingkaran adalah: %f", result)
+		break
+	default:
+		fmt.Println("Wrong choice")
+
+	}
 }
