@@ -13,6 +13,11 @@ import (
 
 func staircase(n int32) {
 	// TODO: answer here
+	var i int32
+    
+    for i = 1; i <= n; i++ {
+        fmt.Printf("%*s\n", n, strings.Repeat("#", int(i)))
+    }
 
 }
 

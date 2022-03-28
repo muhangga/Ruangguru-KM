@@ -12,6 +12,21 @@ import (
 
 func birthdayCakeCandles(candles []int32) int32 {
 	// TODO: answer here
+	var n int32
+    max := candles[0]
+    
+    for _, num := range candles {
+        if num > max {
+            max = num
+        }
+    }
+    
+    for _, num := range candles {
+        if num == max {
+            n++
+        }
+    }
+    return n
 }
 
 func main() {

@@ -26,6 +26,7 @@ func main() {
 	var p Person
 	p.Name = "putra"
 	p.Age = 20
+	
 	fmt.Println("sebelum ulang tahun", p.Age)
 	p.BirthdayPointer()
 	fmt.Println("setelah memanggil BirthdayPointer", p.Age)
