@@ -10,7 +10,7 @@ import (
 
 type User struct {
 	FirstName string `json:"firstName"` // key akan menjadi "firstName"
-	BirthYear int    `json:"birtYear"`  // key akan menjadi "birthYear"
+	BirthYear int    `json:"birthYear"`  // key akan menjadi "birthYear"
 	Email     string // key akan menjadi "Email"
 	Address   string `json:"address,omitempty"`
 	Hobby     string `json:"-"`

@@ -17,6 +17,7 @@ func main() {
 	// Panic error terdeteksi: runtime error: index out of range [8] with length 3
 	// Panic error terdeteksi: runtime error: index out of range [9] with length 3
 	// We handled the panic
+	deferring()
 
 	for i := 0; i < 10; i++ {
 		printBook(i)
@@ -38,4 +39,9 @@ func printBook(i int) {
 
 func deferring() {
 	// TODO: answer here
+	defer func() { 
+		if r := recover(); r != nil {
+			fmt.Println("Panic error terdeteksi:", r)
+		}
+	}()
 }
