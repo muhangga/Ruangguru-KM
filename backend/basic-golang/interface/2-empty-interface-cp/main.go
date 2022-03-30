@@ -12,6 +12,38 @@ func GetMenu() []map[string]interface{} {
 	var menu []map[string]interface{}
 
 	// TODO: answer here
+	// menu = {
+	// 	{
+	// 		"Nama": "Ayam Goreng",
+	// 		"Jenis": "Cepat saji",
+	// 		"Harga": 20000,
+	// 	},
+	// 	{
+	// 		"Nama": "Cola",
+	// 		"Jenis": "Minuman",
+	// 		"Harga": 7000,
+	// 	}
+	// }
+	menu = []map[string]interface{}{
+		{
+			"Nama": "Ayam Goreng",
+			"Jenis": "Cepat saji",
+			"Harga": 20000,
+		},
+		{
+			"Nama": "Cola",
+			"Jenis": "Minuman",
+			"Harga": 7000,
+		},
+	}
+	
+
+	fmt.Println(menu[0]["Nama"])
+	fmt.Println(menu[0]["Jenis"])
+	fmt.Println(menu[0]["Harga"])
+	fmt.Println(menu[1]["Nama"])
+	fmt.Println(menu[1]["Jenis"])
+	fmt.Println(menu[1]["Harga"])
 
 	return menu
 }

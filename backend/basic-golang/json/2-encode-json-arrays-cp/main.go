@@ -10,9 +10,9 @@ import (
 
 type Meja struct {
 	// TODO: answer here
-	Jenis string `json:"jenis"`
-	Warna string `json:"warna"`
-	Jumlah int `json:"jumlah"`
+	Jenis     string `json:"jenis"`
+	Warna     string `json:"warna"`
+	Jumlah    int    `json:"jumlah"`
 	Deskripsi string `json:"deskripsi"`
 }
 

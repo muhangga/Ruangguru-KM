@@ -12,10 +12,27 @@ import "fmt"
 // Bonus untuk JuniorEngineer adalah 1 * BaseSalary
 
 // TODO: answer here
+type Employee interface {
+	GetBonus() int
+}
+
+func Manager(baseSalary int) Employee {
+	return 3 * baseSalary
+}
+
+func SeniorEngineer(baseSalary int) Employee {
+	
+}
+
+func JuniorEngineer(baseSalary int) Employee {
+
+}
 
 func TotalEmployeeBonus(employees []Employee) int {
 	// Hitunglah total bonus yang dikeluarkan dari list of Employee
 	// TODO: answer here
+
+
 }
 
 func main() {
