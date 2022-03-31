@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 )
 
@@ -32,4 +33,26 @@ func (m Items) EncodeJSON() string {
 
 func NewMeja(m Items) Items {
 	return m
+}
+
+func main() {
+	items := Items{
+		MejaMeja: []Meja{
+			{
+				Jenis:     "Meja Lipat",
+				Warna:     "Coklat",
+				Jumlah:    40,
+				Deskripsi: "meja untuk belajar",
+			},
+			{
+				Jenis:     "Meja Hijau",
+				Warna:     "Hijau",
+				Jumlah:    10,
+				Deskripsi: "meja untuk pengadilan",
+			},
+		},
+	}
+
+	result := items.EncodeJSON()
+	fmt.Println(result)
 }

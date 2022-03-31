@@ -16,9 +16,9 @@ import (
 
 type UserRank struct {
 	// TODO: answer here
-	Name  string `json: "name"`
-	Email string `json: "-"`
-	Rank  int    `json: "rank"`
+	Name  string 
+	Email string  `json:"-"`
+	Rank  int    
 }
 
 type Leaderboard struct {
@@ -28,15 +28,14 @@ type Leaderboard struct {
 func DecodeToLeaderboard(jsonData []byte) (Leaderboard, error) {
 	// TODO: answer here
 
-	leaderBoard := Leaderboard{}
-	err := json.Unmarshal(jsonData, &leaderBoard)
+	l := Leaderboard{}
+	err := json.Unmarshal(jsonData, &l)
 
 	if err != nil {
-		return leaderBoard, err
+		return l, err
 	}
 
-	
-	return leaderBoard, nil
+	return l, nil
 }
 
 func main() {

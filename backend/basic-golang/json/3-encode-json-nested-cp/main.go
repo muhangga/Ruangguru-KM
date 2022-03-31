@@ -39,8 +39,8 @@ type Ukuran struct {
 
 type Meja struct {
 	// TODO: answer here
-	Jenis string `json:"jenis"`
-	Warna string `json:"warna"`
+	Jenis  string `json:"jenis"`
+	Warna  string `json:"warna"`
 	Jumlah int    `json:"jumlah"`
 	Ukuran Ukuran `json:"ukuran"`
 }
@@ -51,11 +51,11 @@ type Items struct {
 
 func (m Items) EncodeJSON() string {
 	// TODO: answer here
-	jsonMeja, err := json.Marshal(m)
+	jsonMeja, err := json.Marshal(m.MejaMeja)
 	if err != nil {
 		log.Fatal("JSON Marshal error: ", err)
 	}
-	
+
 	return string(jsonMeja)
 }
 
@@ -64,28 +64,31 @@ func NewMeja(m Items) Items {
 }
 
 func main() {
-	items := []Meja{
-		{
-			Jenis:  "Meja Makan",
-			Warna:  "Coklat",
-			Jumlah: 20,
-			Ukuran: Ukuran{
-				Panjang: "50 cm",
-				Tinggi:  "25 cm",
+
+	items := Items{
+		MejaMeja: []Meja{
+			{
+				Jenis:  "Meja Makan",
+				Warna:  "Coklat",
+				Jumlah: 20,
+				Ukuran: Ukuran{
+					Panjang: "50 cm",
+					Tinggi:  "25 cm",
+				},
 			},
-		},
-		{
-			Jenis:  "Meja Lipat",
-			Warna:  "Hitam",
-			Jumlah: 1,
-			Ukuran: Ukuran{
-				Panjang: "70 cm",
-				Tinggi:  "30 cm",
+			{
+				Jenis:  "Meja Lipat",
+				Warna:  "Hitam",
+				Jumlah: 1,
+				Ukuran: Ukuran{
+					Panjang: "70 cm",
+					Tinggi:  "30 cm",
+				},
 			},
 		},
 	}
 
-	mejaJSON := EncodeJSON(NewMeja(Items{MejaMeja: items}))
-	fmt.Println(mejaJSON)
+	res := items.EncodeJSON()
 
+	fmt.Println(res)
 }
