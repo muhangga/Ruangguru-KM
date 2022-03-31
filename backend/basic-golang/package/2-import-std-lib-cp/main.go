@@ -1,14 +1,19 @@
 package main
 
 import (
-	// TODO: answer here
+	"fmt"
+	"time"
 )
+
+// TODO: answer here
 
 // Dari contoh yang telah diberikan dan eksplorasi yang dilakukan dari standard library golang, kamu dapat mencoba untuk mengimport salah satu package pada golang.
 // Cobalah untuk mengimport package time dan lakukan perhitungan perbedaan hari antara dua waktu.
 
 func CountDays(start, end time.Time) int {
 	// TODO: answer here
+
+	return int(end.Sub(start).Hours() / 24)
 }
 
 func main() {
