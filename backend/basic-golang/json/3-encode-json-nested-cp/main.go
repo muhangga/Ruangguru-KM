@@ -89,6 +89,5 @@ func main() {
 	}
 
 	res := items.EncodeJSON()
-
 	fmt.Println(res)
 }
