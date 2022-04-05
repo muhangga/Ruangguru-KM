@@ -18,7 +18,7 @@ func (u *TransactionRepository) Pay(amount int) (int, error) {
 
 	for i := 0; i < len(cartItems); i++ {
 		if cartItems[i].Quantity > 0 {
-			amount -= cartItems[i].Price * cartItems[i].Quantity
+			amount = amount - (cartItems[i].Price * cartItems[i].Quantity)
 		}
 	}
 

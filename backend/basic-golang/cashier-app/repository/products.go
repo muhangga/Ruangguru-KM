@@ -21,13 +21,7 @@ func (u *ProductRepository) LoadOrCreate() ([]Product, error) {
 	records, err := u.db.Load("products")
 
 	if err != nil {
-
-		records = [][]string{
-			{"id", "name", "price"},
-		}
-		if err := u.db.Save("products", records); err != nil {
-			return nil, err
-		}
+		return nil, err
 	}
 
 	result := make([]Product, 0)

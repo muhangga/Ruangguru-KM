@@ -9,6 +9,22 @@ import (
 
 func main() {
 	fmt.Print("Hello World")
+
+	var dataMap = make(map[string]string)
+	fileName := "bookAuthor.txt"
+	err := ScanToMap(dataMap, fileName)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(dataMap)
+
+	var dataArray = make([]string, 0)
+	fileName = "main.txt"
+	err = ScanToArray(&dataArray, fileName)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(dataArray)
 }
 
 func ScanToArray(arr *[]string, fileName string) error {

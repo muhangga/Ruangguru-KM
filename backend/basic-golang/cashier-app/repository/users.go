@@ -20,12 +20,7 @@ func (u *UserRepository) LoadOrCreate() ([]User, error) {
 
 	records, err := u.db.Load("users")
 	if err != nil {
-		records = [][]string{
-			{"username", "password", "loggedin"},
-		}
-		if err := u.db.Save("users", records); err != nil {
-			return nil, err
-		}
+		return nil, err
 	}
 
 	result := make([]User, 0)
@@ -45,8 +40,6 @@ func (u *UserRepository) LoadOrCreate() ([]User, error) {
 	}
 
 	return result, nil
-
-	// return []User{}, nil // TODO: replace this
 }
 
 func (u *UserRepository) SelectAll() ([]User, error) {
