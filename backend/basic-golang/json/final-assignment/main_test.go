@@ -1,6 +1,8 @@
 package main_test
 
 import (
+	"encoding/json"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
@@ -13,6 +15,11 @@ var _ = Describe("JSON Encode", func() {
 		It("encoding string JSON array nested", func() {
 			items := jsonencode.Ruang{}
 			// TODO: answer here
+
+			jsonString, err := json.Marshal(items)
+			Expect(err).To(BeNil())
+
+			Expect(string(jsonString)).To(Equal(`{"ruangTamu":{"items":null}}`))
 
 			meja := jsonencode.NewRuang(items)
 			result := meja.EncodeJSON()

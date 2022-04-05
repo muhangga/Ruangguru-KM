@@ -35,10 +35,9 @@ import (
 */
 
 type Ruang struct {
-	RuangTamu Items `json:"ruangTamu"`
+	Items Items `json:"ruangTamu"`
 }
 
-// TODO: answer here
 type Items struct {
 	Items []Item `json:"items"`
 }
@@ -72,28 +71,30 @@ func NewRuang(r Ruang) Ruang {
 
 func main() {
 
-	items := Ruang{
-		Items{[]Item{
-			{
-				Nama:   "Meja",
-				Jumlah: 20,
-				Warna:  "Coklat",
-				Ukuran: Ukuran{
-					Panjang: "50 cm",
-					Tinggi:  "25 cm",
-				},
-			},
-			{
-				Nama:   "Meja Lipat",
-				Warna:  "Hitam",
-				Jumlah: 1,
-				Ukuran: Ukuran{
-					Panjang: "70 cm",
-					Tinggi:  "30 cm",
-				},
-			},
-		}},
-	}
+	// items := Ruang{
+	// 	Items{[]Item{
+	// 		{
+	// 			Nama:   "Meja",
+	// 			Jumlah: 20,
+	// 			Warna:  "Coklat",
+	// 			Ukuran: Ukuran{
+	// 				Panjang: "50 cm",
+	// 				Tinggi:  "25 cm",
+	// 			},
+	// 		},
+	// 		{
+	// 			Nama:   "Meja Lipat",
+	// 			Warna:  "Hitam",
+	// 			Jumlah: 1,
+	// 			Ukuran: Ukuran{
+	// 				Panjang: "70 cm",
+	// 				Tinggi:  "30 cm",
+	// 			},
+	// 		},
+	// 	}},
+	// }
+
+	items := Ruang{}
 
 
 	meja := NewRuang(items)
