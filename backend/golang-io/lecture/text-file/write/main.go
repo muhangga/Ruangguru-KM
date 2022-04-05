@@ -33,7 +33,7 @@ func CreateFile() {
 
 func main() {
 	CreateFile()
-	//reset() //uncoment this to remove the created text file
+	reset() //uncoment this to remove the created text file
 }
 
 // reference : https://www.geeksforgeeks.org/how-to-read-and-write-the-files-in-golang/

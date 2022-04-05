@@ -23,7 +23,7 @@ func main() {
 	andi := student{Name: "andi", Score: 85, Class: "c"}
 	newData := []student{arif, andi}
 	writeJSON(fileName, newData)
-	reset(fileName) //comment line ini agar file yang dibuat dapat dilihat
+	/// reset(fileName) //comment line ini agar file yang dibuat dapat dilihat
 }
 
 func writeJSON(fileName string, data []student) error {

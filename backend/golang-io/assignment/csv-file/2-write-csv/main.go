@@ -13,9 +13,9 @@ type Employee struct {
 }
 
 func main() {
-	csvFile, err := os.Create("employee.csv")
+	csvFile, err := os.Create("backend/golang-io/assignment/csv-file/2-write-csv/employee.csv")
 	if err != nil {
-		log.Fatalf("Cannot create file %q: %s\n", "employee.csv", err)
+		log.Fatalf("Cannot create file %q: %s\n", "backend/golang-io/assignment/csv-file/2-write-csv/employee.csv", err)
 	}
 
 	defer csvFile.Close()
@@ -40,10 +40,10 @@ func main() {
 
 	// Uncomment this to try it out, Comment Above
 	// // Using WriteAll
-	// var data [][]string
-	// for _, record := range records {
-	// 	row := []string{record.ID, strconv.Itoa(record.Age)}
-	// 	data = append(data, row)
-	// }
-	// csvWriter.WriteAll(data)
+	var data [][]string
+	for _, record := range records {
+		row := []string{record.ID, strconv.Itoa(record.Age)}
+		data = append(data, row)
+	}
+	csvWriter.WriteAll(data)
 }

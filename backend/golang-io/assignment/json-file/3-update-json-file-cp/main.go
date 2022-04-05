@@ -28,28 +28,53 @@ func main() {
 	}
 
 	//comment baseData and reset to show change in json file
-	baseData := []student{
-		{
-			Name:  "aldo",
-			Score: 90,
-			Class: "C",
-		},
-		{
-			Name:  "aldi",
-			Score: 94,
-			Class: "C",
-		},
-		{
-			Name:  "ado",
-			Score: 93,
-			Class: "C",
-		},
-	}
-	reset(fileName, baseData)
+	// baseData := []student{
+	// 	{
+	// 		Name:  "aldo",
+	// 		Score: 90,
+	// 		Class: "C",
+	// 	},
+	// 	{
+	// 		Name:  "aldi",
+	// 		Score: 94,
+	// 		Class: "C",
+	// 	},
+	// 	{
+	// 		Name:  "ado",
+	// 		Score: 93,
+	// 		Class: "C",
+	// 	},
+	// }
+	// reset(fileName, baseData)
 }
 
 func updateJSON(fileName string, newData []student) ([]student, error) {
-	return []student{}, nil // TODO: replace this
+
+	path, err := filepath.Abs(fileName + ".json")
+	if err != nil {
+		return nil, err
+	}
+	file, err := openFile(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	students, err := readJSON(fileName)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, student := range newData {
+		students = append(students, student)
+	}
+
+	json, err := json.Marshal(students)
+	if err != nil {
+		return nil, err
+	}
+	ioutil.WriteFile(path, json, os.ModePerm)
+	return students, nil
 }
 
 func openFile(path string) (*os.File, error) {

@@ -23,11 +23,25 @@ func main() {
 	andi := student{Name: "andi", Score: 85, Class: "c"}
 	newData := []student{arif, andi}
 	writeJSON(fileName, newData)
-	reset(fileName) //comment line ini agar file yang dibuat dapat dilihat
+	//reset(fileName) //comment line ini agar file yang dibuat dapat dilihat
 }
 
 func writeJSON(fileName string, data []student) error {
-	return nil // TODO: replace this
+
+	path, err := filepath.Abs(fileName + ".json")
+	if err != nil {
+		return err
+	}
+
+	file, err := openFile(path)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	jsonData, _ := json.Marshal(data)
+	ioutil.WriteFile(path, jsonData, 0644)
+	return nil
 }
 
 func openFile(path string) (*os.File, error) {

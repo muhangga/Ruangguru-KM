@@ -7,22 +7,19 @@ import (
 	"log"
 )
 
-func ReadFile() {
-	// nama text file yang ingin dibaca
-	fileName := "read.txt"
+func readFile() {
+	fileName := "backend/golang-io/lecture/text-file/read/read.txt"
 
-	//membaca text file
 	data, err := ioutil.ReadFile(fileName)
 	if err != nil {
-		log.Panicf("failed reading data from file: %s", err)
+		log.Panicf("failed reading data from file %s", err)
 	}
-	fmt.Printf("File Name: %s", fileName)
-	fmt.Printf("\nSize: %d bytes", len(data))
-	fmt.Printf("\nData: %s\n", data)
+	fmt.Printf("File Name: %s\n", fileName)
+	fmt.Printf("Size %d bytes\n", len(data))
+	fmt.Printf("Data: %s\n", data)
 }
 
 func main() {
-	ReadFile()
+	readFile()
 }
-
 //reference : https://www.geeksforgeeks.org/how-to-read-and-write-the-files-in-golang/

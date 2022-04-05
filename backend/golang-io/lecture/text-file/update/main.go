@@ -10,7 +10,7 @@ import (
 
 func UpdateFile(newWord string) {
 	// nama text file yang ingin dibaca
-	fileName := "read.txt"
+	fileName := "backend/golang-io/lecture/text-file/update/read.txt"
 
 	//membaca text file
 	data, err := ioutil.ReadFile(fileName)
@@ -50,7 +50,7 @@ func UpdateFile(newWord string) {
 func main() {
 	word := "update"
 	UpdateFile(word)
-	reset(word) // delete this to show change in txt file
+	// reset(word) // delete this to show change in txt file
 }
 
 //reference : https://www.geeksforgeeks.org/how-to-read-and-write-the-files-in-golang/

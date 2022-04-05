@@ -58,14 +58,12 @@ type Ukuran struct {
 func (r Ruang) EncodeJSON() string {
 	// TODO: answer here
 
-	jsonRuang, err := json.Marshal(r)
-
+	jsonString, err := json.Marshal(r)
 	if err != nil {
-		log.Fatal("JSON Marshal error: ", err)
+		log.Println(err)
 	}
 
-	jsonData := string(jsonRuang)
-	return jsonData
+	return string(jsonString)
 }
 
 func NewRuang(r Ruang) Ruang {
@@ -74,7 +72,7 @@ func NewRuang(r Ruang) Ruang {
 
 func main() {
 
-	ruangTamu := Ruang{
+	items := Ruang{
 		Items{[]Item{
 			{
 				Nama:   "Meja",
@@ -97,5 +95,9 @@ func main() {
 		}},
 	}
 
-	fmt.Println(ruangTamu.EncodeJSON())
+
+	meja := NewRuang(items)
+	result := meja.EncodeJSON()
+
+	fmt.Println(result)
 }
