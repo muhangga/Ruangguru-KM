@@ -14,12 +14,38 @@ type AuthErrorResponse struct {
 }
 
 func (api *API) login(w http.ResponseWriter, req *http.Request) {
+	username := req.URL.Query().Get("username")
+	password := req.URL.Query().Get("password")
+	res, err := api.usersRepo.Login(username, password)
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: "admin"})
+	w.Header().Set("Content-Type", "application/json")
+	encoder := json.NewEncoder(w)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: ""}) // TODO: replace this
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(LoginSuccessResponse{Username: *res})
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
-	// encoder.Encode(AuthErrorResponse{Error: ""}) // TODO: replace this
+	username := req.URL.Query().Get("username")
+	err := api.usersRepo.Logout(username)
+	if err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder := json.NewEncoder(w)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+
+	if err = api.cartItemRepo.ResetCartItems(); err != nil {
+		w.WriteHeader(http.StatusUnauthorized)
+		encoder := json.NewEncoder(w)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }
