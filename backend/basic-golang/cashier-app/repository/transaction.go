@@ -10,17 +10,23 @@ func NewTransactionRepository(cartItemRepository CartItemRepository) Transaction
 
 func (u *TransactionRepository) Pay(amount int) (int, error) {
 
-	cartItems, err := u.cartItemRepository.SelectAll()
+	// cartItems, err := u.cartItemRepository.SelectAll()
 
+	// if err != nil {
+	// 	return 0, err
+	// }
+
+	// for i := 0; i < len(cartItems); i++ {
+	// 	if cartItems[i].Quantity > 0 {
+	// 		amount = amount - (cartItems[i].Price * cartItems[i].Quantity)
+	// 	}
+	// }
+
+	totalPrice, err := u.cartItemRepository.TotalPrice()
 	if err != nil {
-		return 0, err
+		return 0, nil
 	}
 
-	for i := 0; i < len(cartItems); i++ {
-		if cartItems[i].Quantity > 0 {
-			amount = amount - (cartItems[i].Price * cartItems[i].Quantity)
-		}
-	}
-
-	return amount, nil
+	moneyChanges := amount - totalPrice
+	return moneyChanges, nil
 }

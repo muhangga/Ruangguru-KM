@@ -17,7 +17,12 @@ func NewCartItemRepository(db db.DB) CartItemRepository {
 func (u *CartItemRepository) LoadOrCreate() ([]CartItem, error) {
 	records, err := u.db.Load("cart_items")
 	if err != nil {
-		return nil, err
+		records = [][]string{
+			{"category", "product_name", "price", "quantity"},
+		}
+		if err := u.db.Save("cart_items", records); err != nil {
+			return nil, err
+		}
 	}
 
 	result := make([]CartItem, 0)
@@ -95,6 +100,8 @@ func (u *CartItemRepository) Add(product Product) error {
 }
 
 func (u *CartItemRepository) ResetCartItems() error {
+
+	u.db.Delete("cart_items")
 
 	records := [][]string{
 		{"category", "product_name", "price", "quantity"},

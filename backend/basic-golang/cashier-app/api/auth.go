@@ -14,6 +14,9 @@ type AuthErrorResponse struct {
 }
 
 func (api *API) login(w http.ResponseWriter, req *http.Request) {
+
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: "admin"})
+
 	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: ""}) // TODO: replace this
 }
 

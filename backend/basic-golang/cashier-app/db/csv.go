@@ -54,10 +54,9 @@ func (db *CsvDB) Save(dbName DBName, rows Rows) error {
 }
 
 func (db *CsvDB) Delete(dbName DBName) error {
-	err := os.Truncate("./data/"+dbName+".csv", 0)
+	err := os.Truncate("./data./"+dbName+".csv", 0)
 	if err != nil {
 		return err
-
 	}
 	return nil
 }
