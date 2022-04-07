@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -56,6 +57,12 @@ func TablesHandler(w http.ResponseWriter, r *http.Request) {
 	// logic handle POST request
 	if r.Method == "POST" {
 		// TODO: answer here
+		body, err := ioutil.ReadAll(r.Body)
+		if err != nil {
+			log.Fatalf("could not create request: %v", err)
+		}
+
+		log.Println(string(body))
 
 		// set header response code with status created/201
 		w.WriteHeader(http.StatusCreated)
