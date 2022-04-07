@@ -29,24 +29,16 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 		// mengambil value yang dikirim oleh client dengan key `total`
 		totalID := r.FormValue("total")
 
-		convertTotal, err := strconv.Atoi(totalID)
-
-		if err != nil {
-			http.Error(w, err.Error(), http.StatusInternalServerError)
-			return
-		}
+		
 
 		// validate table id yang sesuai dengan id yang dikirim client
 		for _, table := range data {
+			convertTotal, _ := strconv.Atoi(totalID)
+
 			if table.Total == convertTotal {
-				result, err := json.Marshal(table)
+				result, _ := json.Marshal(table)
 
-				if err != nil {
-					http.Error(w, err.Error(), http.StatusInternalServerError)
-					return
-				}
-
-				// daftarkan response `result` jika ditemukan id yang sesuai dengan input client
+			
 				w.Write(result)
 				return
 			}

@@ -2,44 +2,11 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"log"
 )
 
-// buat JSON string array nested seperti berikut
-/*
-{
-	"ruangTamu": {
-			"items": [
-					{
-							"nama": "Meja",
-							"jumlah": 20,
-							"warna": "Coklat",
-							"ukuran": {
-									"panjang": "50 cm",
-									"tinggi": "25 cm"
-							}
-					},
-					{
-							"nama": "Kursi",
-							"jumlah": 1,
-							"warna": "Hitam",
-							"ukuran": {
-									"panjang": "70 cm",
-									"tinggi": "30 cm"
-							}
-					}
-			]
-	}
-}
-*/
-
+// TODO: answer here
 type Ruang struct {
-	Items Items `json:"ruangTamu"`
-}
-
-type Items struct {
-	Items []Item `json:"items"`
+	RuangTamu Items `json:"ruangTamu"`
 }
 
 type Item struct {
@@ -49,6 +16,10 @@ type Item struct {
 	Ukuran Ukuran `json:"ukuran"`
 }
 
+type Items struct {
+	Items []Item `json:"items"`
+}
+
 type Ukuran struct {
 	Panjang string `json:"panjang"`
 	Tinggi  string `json:"tinggi"`
@@ -56,13 +27,11 @@ type Ukuran struct {
 
 func (r Ruang) EncodeJSON() string {
 	// TODO: answer here
+	// encode
+	data, _ := json.Marshal(r)
+	// convert to string
+	return string(data)
 
-	jsonString, err := json.Marshal(r)
-	if err != nil {
-		log.Println(err)
-	}
-
-	return string(jsonString)
 }
 
 func NewRuang(r Ruang) Ruang {
@@ -71,34 +40,42 @@ func NewRuang(r Ruang) Ruang {
 
 func main() {
 
-	// items := Ruang{
-	// 	Items{[]Item{
-	// 		{
-	// 			Nama:   "Meja",
-	// 			Jumlah: 20,
-	// 			Warna:  "Coklat",
-	// 			Ukuran: Ukuran{
-	// 				Panjang: "50 cm",
-	// 				Tinggi:  "25 cm",
-	// 			},
-	// 		},
-	// 		{
-	// 			Nama:   "Meja Lipat",
-	// 			Warna:  "Hitam",
-	// 			Jumlah: 1,
-	// 			Ukuran: Ukuran{
-	// 				Panjang: "70 cm",
-	// 				Tinggi:  "30 cm",
-	// 			},
-	// 		},
-	// 	}},
-	// }
+	// masukan data ke struct Item
+	mejaMeja := []Item{
+		
+		{
+			Nama:   "Meja",
+			Jumlah: 20,
+			Warna:  "Coklat",
+			Ukuran: Ukuran{
+				Panjang: "50 cm",
+				Tinggi:  "25 cm",
+			},
+		},
+		{
+			Nama:   "Kursi",
+			Jumlah: 1,
+			Warna:  "Hitam",
+			Ukuran: Ukuran{
+				Panjang: "70 cm",
+				Tinggi:  "30 cm",
+			},
+		},
+	
+	}
 
-	items := Ruang{}
+	// masukan mejaMeja ke struct Items
+	items := Items{
+		mejaMeja,
+	}
 
+	ruang := Ruang{
+		RuangTamu: items,
+	}
 
-	meja := NewRuang(items)
-	result := meja.EncodeJSON()
+	// encode ke funtion EncodeJSON
+	encode := ruang.EncodeJSON()
 
-	fmt.Println(result)
+	// print
+	println(encode)
 }
