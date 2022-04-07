@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 )
@@ -23,27 +24,43 @@ func TableHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	if r.Method == "GET" {
+		// validate methode request
+		// logic handler untuk GET request
+		if r.URL.Query().Get("total") != "" {
+			total, err := strconv.Atoi(r.URL.Query().Get("total"))
+			if err != nil {
+				log.Fatalf("expected status bad request 400; got %v", http.StatusNotFound)
+			}
 
-		// TODO: answer here
+			// filter data
+			var result []Table
+			for _, table := range data {
+				if table.Total == total {
+					result = append(result, table)
+				}
+			}
 
-		// mengambil value yang dikirim oleh client dengan key `total`
-		totalID := r.FormValue("total")
+			// expected status bad request 400; got 404
+			if len(result) == 0 {
+				log.Fatalf("expected status bad request 400; got %v", http.StatusNotFound)
+			}
 
-		
-
-		// validate table id yang sesuai dengan id yang dikirim client
-		for _, table := range data {
-			convertTotal, _ := strconv.Atoi(totalID)
-
-			if table.Total == convertTotal {
-				result, _ := json.Marshal(table)
-
-			
-				w.Write(result)
+			// encode data ke dalam format string JSON
+			resultJSON, err := json.Marshal(result)
+			if err != nil {
+				
 				return
 			}
+
+			// expected status bad request 400; got 404
+
+	
+			// untuk mendaftarkan result sebagai response
+			w.Write(resultJSON)
+			return
 		}
 
+		// TODO: answer here
 		http.Error(w, `{"status":"table not found"}`, http.StatusNotFound)
 		return
 	}
