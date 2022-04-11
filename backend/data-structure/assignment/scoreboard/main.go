@@ -19,8 +19,15 @@ func (s Scores) Len() int {
 
 func (s Scores) Less(i, j int) bool {
 
-	
-	return false
+	if s[i].Correct*4-s[i].Wrong == s[j].Correct*4-s[j].Wrong {
+		if s[i].Empty < s[j].Empty {
+			return true
+		} else {
+			return false
+		}
+	} else {
+		return s[i].Correct*4-s[i].Wrong > s[j].Correct*4-s[j].Wrong
+	}
 }
 
 func (s Scores) Swap(i, j int) {
@@ -28,13 +35,14 @@ func (s Scores) Swap(i, j int) {
 }
 
 func (s Scores) TopStudents() []string {
-	// sort.Sort(s)
+	sort.Sort(s)
+	var result []string
 
-	var topStudents []string
+	for _, score := range s {
+		result = append(result, score.Name)
+	}
 
-
-	return topStudents
-
+	return result
 }
 
 func main() {
