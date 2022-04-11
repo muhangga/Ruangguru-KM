@@ -26,11 +26,25 @@ func MostWordsFound(sentences []string) int {
 	ans := 0
 	for _, sentence := range sentences {
 		max := CountWords(sentence)
-		// TODO: answer here
+		
+		
 	}
 	return ans
 }
 
 func CountWords(sentence string) int {
-	return 0 // TODO: replace this
+	
+	var words = []string{}
+	
+	for _, word := range sentence {
+		if word == ' ' {
+			words = append(words, sentence)
+			sentence = ""
+		} else {
+			sentence += string(word)
+		}
+	}
+	
+	return len(words)
+
 }
