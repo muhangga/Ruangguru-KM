@@ -25,8 +25,12 @@ func (s Scores) Less(i, j int) bool {
 		} else {
 			return false
 		}
+	} 
+	
+	if s[i].Correct*4-s[i].Wrong > s[j].Correct*4-s[j].Wrong {
+		return true
 	} else {
-		return s[i].Correct*4-s[i].Wrong > s[j].Correct*4-s[j].Wrong
+		return false
 	}
 }
 
@@ -41,7 +45,6 @@ func (s Scores) TopStudents() []string {
 	for _, score := range s {
 		result = append(result, score.Name)
 	}
-
 	return result
 }
 
@@ -53,8 +56,6 @@ func main() {
 		{"Ega", 3, 0, 7},
 		{"Anton", 2, 0, 5},
 	})
-
-
 
 	sort.Sort(scores)
 	fmt.Println(scores.TopStudents())
