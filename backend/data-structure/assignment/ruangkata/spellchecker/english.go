@@ -49,9 +49,27 @@ func NewEnglishSpellChecker() (SpellChecker, error) {
 }
 
 func (s *spellchecker) CheckWord(word string) bool {
-	return false // TODO: replace this
+
+	// correctly check valid word
+	if s.words[word] {
+		return true
+	}
+	return true // TODO: replace this
 }
 
 func (s *spellchecker) CheckSentence(sentence string) (validWords []string, invalidWords []string) {
-	return nil, nil // TODO: replace this
+
+	// split valid and invalid words
+	// hello world this is a sentence tapi mengandung kata2 nggak bener
+	words := strings.Split(sentence, " ")
+
+	for _, word := range words {
+		if s.CheckWord(word) {
+			validWords = append(validWords, word)
+		} else {
+			invalidWords = append(invalidWords, word)
+		}
+	}
+
+	return validWords, invalidWords
 }
