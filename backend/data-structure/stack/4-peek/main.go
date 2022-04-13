@@ -1,6 +1,9 @@
 package main
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 // Melihat elemen teratas pada stack disebut dengan peek.
 
@@ -15,4 +18,21 @@ func (s *Stack) Peek() (int, error) {
 	} else {
 		return s.Data[s.Top], nil
 	}
+}
+
+
+func main() {
+	stack := Stack{
+		Top:  -1,
+		Data: []int{},
+	}
+
+	stack.Top += 1
+	stack.Data = append(stack.Data, 1)
+	stack.Top += 1
+	stack.Data = append(stack.Data, 2)
+	stack.Top += 1
+	stack.Data = append(stack.Data, 3)
+
+	fmt.Println(stack.Peek())
 }
