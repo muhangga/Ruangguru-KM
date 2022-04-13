@@ -18,7 +18,7 @@ func NewStack(size int) Stack {
 	stack := Stack{}
 
 	stack.Top = -1
-	stack.Data = []int{1,2,34,5,6,7,8,9,9,1,1}
+	stack.Data = []int{}
 	stack.Size = size
 
 	return stack
