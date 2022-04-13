@@ -50,11 +50,13 @@ func NewEnglishSpellChecker() (SpellChecker, error) {
 
 func (s *spellchecker) CheckWord(word string) bool {
 
-	// correctly check valid word
-	if s.words[word] {
+	spell := strings.ToLower(word)
+
+	if _, ok := s.words[spell]; ok {
 		return true
 	}
-	return true // TODO: replace this
+
+	return false
 }
 
 func (s *spellchecker) CheckSentence(sentence string) (validWords []string, invalidWords []string) {
@@ -64,11 +66,13 @@ func (s *spellchecker) CheckSentence(sentence string) (validWords []string, inva
 	words := strings.Split(sentence, " ")
 
 	for _, word := range words {
-		if s.CheckWord(word) {
-			validWords = append(validWords, word)
-		} else {
+		validWords = append(validWords, word)
+
+		if !s.CheckWord(word) {
 			invalidWords = append(invalidWords, word)
 		}
+
+
 	}
 
 	return validWords, invalidWords

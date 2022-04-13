@@ -29,8 +29,6 @@ import (
 // Penjelasan: tanda kurung buka ditutup dengan pasangannya dan sesuai dengan urutan.
 
 func IsValidParentheses(s string) bool {
-	// TODO: answer here
-
 	data := []rune{'(', ')', '{', '}', '[', ']'}
 
 
@@ -60,45 +58,14 @@ func IsValidParentheses(s string) bool {
 			}
 		}
 	}
-	
-
 	return false
 }
 
 func main() {
-	fmt.Println(IsValidParentheses("(3wew3)"))
-	fmt.Println(IsValidParentheses("[{{})]"))
+	fmt.Println(IsValidParentheses("(){}[]"))
+	fmt.Println(IsValidParentheses("()"))
 	fmt.Println(IsValidParentheses("([])"))
 	fmt.Println(IsValidParentheses("([)]"))
 	fmt.Println(IsValidParentheses("{[()]}"))
 	fmt.Println(IsValidParentheses("{[(])}"))
 }
-
-
-// parentheseMap := map[rune]rune{
-// 	'(': '}',
-// 	'{': '}',
-// 	'[': ']',
-// }
-
-// stack := stack.Stack{
-// 	Top:  -1,
-// 	Data: []rune{},
-// }
-
-// for _, v := range s {
-// 	if _, ok := parentheseMap[v]; ok {
-// 		stack.Push(v)
-// 		return true
-// 	} else {
-// 		if stack.Top == -1 {
-// 			return false
-// 		}
-
-// 		if stack.Data[stack.Top] != parentheseMap[v] {
-// 			return false
-// 		}
-
-// 		stack.Pop()
-// 	}
-// }
