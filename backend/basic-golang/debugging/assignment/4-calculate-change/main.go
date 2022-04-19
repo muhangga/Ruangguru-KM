@@ -37,52 +37,19 @@ func CalculateChange(totalPayment, totalPrice float64) float64 {
 func CalculateChangeCorrect(totalPayment, totalPrice float64) float64 {
 
 
-	if totalPayment < totalPrice {
-		return -1
-	}
-
 	minimumPriceForDiscount := float64(100000)
 	if totalPrice >= minimumPriceForDiscount {
-		
 		// Give 5% Discount rate
-		discount := totalPrice * 0.05
-		totalPrice = totalPrice - discount
-
-		// Payment Below Price
-		if totalPayment < totalPrice {
-			return -1
-		}
-
-		// Payment Higher than Price After Discount
-		if totalPayment > totalPrice {
-			// CalculateChangeCorrect(98000, 100000)
-			return totalPayment - (totalPrice + discount)
-		}
+		discountRate := 0.5
+		afterdisc := totalPrice * discountRate / 10
+		totalPrice = totalPrice - afterdisc
 
 	}
-
-	// Calculate Change With Discount Rate [It] Normal Payment Price
-	
 
 	change := totalPayment - totalPrice
 
+	if totalPayment < totalPrice {
+		return -1
+	}
 	return change
-
-	// if totalPayment < totalPrice {
-	// 	return -1
-	// }
-
-	// var change float64
-
-
-	// minimumPriceForDiscount := float64(100000)
-	// if totalPrice >= minimumPriceForDiscount {
-	// 	// Give 5% Discount rate
-	// 	discountRate := 0.5
-	// 	if totalPayment > totalPrice {
-	// 		change = totalPayment * discountRate
-	// 	}
-	// }
-
-	// return change
 }
