@@ -17,8 +17,8 @@ func main() {
 	fmt.Println(res)
 
 	// Try correct answer:
-	// resCorrect := ConvertSecondToTimeStringCorrect(arr)
-	// fmt.Println(resCorrect)
+	resCorrect := ConvertSecondToTimeStringCorrect(67812)
+	fmt.Println(resCorrect)
 }
 
 func ConvertSecondToTimeString(second int) string {
@@ -30,5 +30,22 @@ func ConvertSecondToTimeString(second int) string {
 }
 
 func ConvertSecondToTimeStringCorrect(second int) string {
-	return "" // TODO: replace this
+
+		/*
+		Convert the given second to 00:00:00 hour minute second format
+
+		Example Input/Output
+		30 -> 00:00:30
+		70 -> 00:01:10
+		67812 -> 18:50:12
+		678120 -> 188:22:00
+
+	*/
+
+	hours := second / 3600
+	minutes := (second - (hours * 3600)) / 60
+	seconds := second - (hours * 3600) - (minutes * 60)
+
+	timeString := fmt.Sprintf("%02d:%02d:%02d", hours, minutes, seconds)
+	return timeString
 }

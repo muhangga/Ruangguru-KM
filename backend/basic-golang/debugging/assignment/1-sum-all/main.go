@@ -9,8 +9,8 @@ func main() {
 	fmt.Println(res)
 
 	// Try correct answer:
-	// resCorrect := SumAllCorrect(arr)
-	// fmt.Println(resCorrect)
+	resCorrect := SumAllCorrect(arr)
+	fmt.Println(resCorrect)
 }
 
 func SumAll(arr []int) int {
@@ -22,5 +22,17 @@ func SumAll(arr []int) int {
 }
 
 func SumAllCorrect(arr []int) int {
-	return 0 // TODO: replace this
+
+	n := len(arr)
+
+	if n == 0 {
+		return 0
+	} 
+	
+	res := 0
+	for _, val := range arr {
+		res += val
+	}
+
+	return res
 }

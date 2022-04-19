@@ -16,8 +16,8 @@ func main() {
 	fmt.Println(res)
 
 	// Try correct answer:
-	// resCorrect := getAverageScoreCorrect(arr)
-	// fmt.Println(resCorrect)
+	resCorrect := getAverageScoreCorrect(arr)
+	fmt.Println(resCorrect)
 }
 
 func getAverageScore(score []int) float32 {

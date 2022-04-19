@@ -7,13 +7,13 @@ func main() {
 		Reverse Word:
 		Example: halo -> olah
 	*/
-	word := "halo"
+	word := "hallo"
 	res := ReverseWord(word)
 	fmt.Println(res)
 
 	// Try correct answer:
-	// resCorrect := ReverseWordCorrect(arr)
-	// fmt.Println(resCorrect)
+	resCorrect := ReverseWordCorrect(word)
+	fmt.Println(resCorrect)
 }
 
 func ReverseWord(word string) string {
@@ -30,5 +30,13 @@ func ReverseWord(word string) string {
 }
 
 func ReverseWordCorrect(word string) string {
-	return 0 // TODO: replace this
+
+	n := len(word)
+	temp := []byte(word)
+
+	for i := 0; i < n/2; i++ {
+		temp[i], temp[n-i-1] = temp[n-i-1], temp[i]
+	}
+
+	return string(temp)
 }

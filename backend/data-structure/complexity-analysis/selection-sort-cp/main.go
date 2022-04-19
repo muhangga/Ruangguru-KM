@@ -48,6 +48,10 @@ func SelectionSort(arr []int) []int {
 		minIndex := i
 		for j := i + 1; j < len; j++ {
 			// TODO: answer here
+			if arr[j] < arr[minIndex] {
+				minIndex = j
+				arr[i], arr[minIndex] = arr[minIndex], arr[i]
+			}
 		}
 	}
 

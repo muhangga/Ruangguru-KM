@@ -33,11 +33,17 @@ func FibonacciRecursion(i int) int {
 		return 1
 	}
 
-	// TODO: answer here
+	// TODO: answer here 
+	return FibonacciRecursion(i-1) + FibonacciRecursion(i-2)
+	/*
+		10
+		0 1 1 2 3 5 8 13 21 34
+	*/
 }
 
 func main() {
 	var i int
+	// i = 3
 	for i = 0; i < 10; i++ {
 		fmt.Printf(" %d  ", FibonacciRecursion(i))
 	}
