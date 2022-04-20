@@ -18,7 +18,10 @@ func createRequest(workerInput, resultChan chan<- int, workerOutput <-chan int) 
 	for i := 1; i < 16; i++ {
 		var res int
 		// TODO: answer here
-		resultSum += res
+		workerInput <- i // kirim angka ke worker
+		res = <-workerOutput // menerima hasil dari worker
+
+		resultSum += res // menjumlahkan hasil
 		fmt.Printf("hasil pangkat 2 angka %d adalah: %d\n", i, res) // 0 1 4 9 16
 	}
 	fmt.Printf("total penjumlahan : %d\n", resultSum)

@@ -5,15 +5,15 @@ package main
 
 import "fmt"
 
-var count int = 0
+// var count int = 0
 
 //function to count digits
 func CountDigits(num int) int {
 
 	if num > 0 {
-		CountDigits(0) // TODO: replace this
+		return 1 + CountDigits(num/10)
 	}
-	return count
+	return 0
 
 }
 
