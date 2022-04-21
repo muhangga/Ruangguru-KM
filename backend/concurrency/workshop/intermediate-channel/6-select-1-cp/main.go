@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type character struct {
 	name            string
@@ -21,13 +24,33 @@ func (c *character) awake(movementInput, attackInput chan string) {
 		//fmt.Printf("%s bergerak ke %s\n", c.name, c.activity)
 		// TODO: answer here
 		select {
-		case movement := <-movementInput:
-			c.activity = movement
-			fmt.Printf("%s bergerak ke %s\n", c.name, c.activity)
 		case attack := <-attackInput:
 			c.activity = attack
 			fmt.Printf("%s melakukan serangan %s\n", c.name, c.activity)
+		case movement := <-movementInput:
+			c.activity = movement
+			fmt.Printf("%s bergerak ke %s\n", c.name, c.activity)
 		}
-
 	}
+}
+
+func main() {
+	john := character{
+		name:            "john",
+		defaultActivity: "mengawasi area",
+		activity:        "",
+	}
+
+	movementInput := make(chan string, 4)
+	attackInput := make(chan string, 3)
+
+	go john.awake(movementInput, attackInput)
+	movementInput <- "atas"
+	movementInput <- "bawah"
+	attackInput <- "A"
+	movementInput <- "kiri"
+	attackInput <- "B"
+	movementInput <- "kanan"
+	attackInput <- "C"
+	time.Sleep(100 * time.Millisecond)
 }
