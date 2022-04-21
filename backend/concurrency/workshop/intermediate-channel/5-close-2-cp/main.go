@@ -10,7 +10,7 @@ func numberWorker(output chan int) {
 	for i := 0; i < 100; i++ {
 		//kirim ke channel
 		// TODO: answer here
-
+		output <- i
 	}
 	close(output)
 	//pastikan tulisan ini berhasil ditampilkan
