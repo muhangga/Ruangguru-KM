@@ -18,6 +18,7 @@ func createRequest(workerInput, resultChan chan<- int, workerOutput <-chan int) 
 	for i := 1; i < 16; i++ {
 		var res int
 		// TODO: answer here
+
 		workerInput <- i // kirim angka ke worker
 		res = <-workerOutput // menerima hasil dari worker
 
