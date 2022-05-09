@@ -23,17 +23,17 @@ func NewAPI(usersRepo repository.UserRepository, productsRepo repository.Product
 
 	mux.HandleFunc("/api/user/login", api.login)
 	mux.HandleFunc("/api/user/logout", api.logout)
-<<<<<<< HEAD
-	mux.HandleFunc("/api/dashboard", api.dashboard)
-	mux.HandleFunc("/api/products", api.productList)
-	mux.HandleFunc("/api/cart/add", api.addToCart)
-	mux.HandleFunc("/api/cart/clear", api.clearCart)
-	mux.HandleFunc("/api/carts", api.cartList)
-=======
+	// mux.HandleFunc("/api/dashboard", api.dashboard)
+	// mux.HandleFunc("/api/products", api.productList)
+	// mux.HandleFunc("/api/cart/add", api.addToCart)
+	// mux.HandleFunc("/api/cart/clear", api.clearCart)
+	// mux.HandleFunc("/api/carts", api.cartList)
 
 	mux.Handle("/api/dashboard", api.AuthMiddleWare(http.HandlerFunc(api.dashboard)))
 	mux.Handle("/api/products", api.AuthMiddleWare(http.HandlerFunc(api.productList)))
 	mux.Handle("/api/cart/add", api.AuthMiddleWare(http.HandlerFunc(api.addToCart)))
+	mux.Handle("/api/cart/clear", api.AuthMiddleWare(http.HandlerFunc(api.clearCart)))
+	mux.Handle("/api/carts", api.AuthMiddleWare(http.HandlerFunc(api.cartList)))
 
 	// TODO: answer here
 
@@ -43,7 +43,7 @@ func NewAPI(usersRepo repository.UserRepository, productsRepo repository.Product
 	// mux.HandleFunc("/api/cart/clear", api.clearCart)
 
 	// TODO: answer here
->>>>>>> c0397392214e368e84db7e7b9a1534ca43781bfb
+	
 
 	return api
 }

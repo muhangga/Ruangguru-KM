@@ -44,7 +44,6 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-<<<<<<< HEAD
 	for _, product := range products {
 		response.Products = append(response.Products, Product{
 			Name:     product.ProductName,
@@ -52,9 +51,7 @@ func (api *API) productList(w http.ResponseWriter, req *http.Request) {
 			Category: product.Category,
 		})
 	}
-=======
 	// fmt.Println(products)
->>>>>>> c0397392214e368e84db7e7b9a1534ca43781bfb
 
 	encoder.Encode(response)
 }

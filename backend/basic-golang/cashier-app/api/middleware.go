@@ -4,8 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"strings"
 
-	"github.com/dgrijalva/jwt-go"
+	"github.com/golang-jwt/jwt/v4"
+	// "strings"
+	// "github.com/dgrijalva/jwt-go"
 )
 
 func (api *API) AllowOrigin(w http.ResponseWriter, req *http.Request) {
@@ -33,14 +36,26 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       3. return bad request ketika field token tidak ada
 
 		// TODO: answer here
-
-		// Task: Ambil value dari cookie token
+		authorizationHeader := r.Header.Get("Authorization")
+		if !strings.Contains(authorizationHeader, "Bearer") {
+			w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: "Unauthorized"})
+			return
+		}
+		if authorizationHeader == "" {
+			w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: "Unauthorized"})
+			return
+		}
 
 		// TODO: answer here
+		tokenString := strings.Replace(authorizationHeader, "Bearer ", "", -1)
 
+		
 		// Task: Deklarasi variable claim
 
 		// TODO: answer here
+		claims := Claims{}
 
 		// Task: 1. parse JWT token ke dalam claim
 		//       2. return unauthorized ketika signature invalid
@@ -48,9 +63,32 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 		//       4. return unauthorized ketika token sudah tidak valid (biasanya karna token expired)
 
 		// TODO: answer here
+		token, err := jwt.ParseWithClaims(tokenString, &claims, func(token *jwt.Token) (interface{}, error) {
+			if method, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: "Unauthorized"})
+			} else if method != jwt.SigningMethodHS256 {
+				w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: "Unauthorized"})
+			}
+			return jwtKey, nil
+		})
 
 		// Task: Validasi
+		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
+			encoder.Encode(AuthErrorResponse{Error: "Bad Request"})
+			return
+		}
 
-		return next.ServeHTTP(w, r) // TODO: replace this
+		claimsToken, ok := token.Claims.(*jwt.MapClaims)
+		if !ok || !token.Valid {
+			w.WriteHeader(http.StatusUnauthorized)
+			encoder.Encode(AuthErrorResponse{Error: "Unauthorized"})
+			return
+		}
+
+		ctx := context.WithValue(r.Context(), "token", claimsToken)
+		next.ServeHTTP(w, r.WithContext(ctx))
 	})
 }

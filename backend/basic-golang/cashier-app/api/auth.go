@@ -39,34 +39,48 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 		encoder.Encode(AuthErrorResponse{Error: err.Error()})
 		return
 	}
-
-<<<<<<< HEAD
-	w.WriteHeader(http.StatusOK)
-	encoder.Encode(LoginSuccessResponse{Username: *res})
-=======
+	
 	// Task: 1. Deklarasi expiry time untuk token jwt
 	//       2. Buat claim menggunakan variable yang sudah didefinisikan diatas
 	//       3. expiry time menggunakan time millisecond
 
 	// TODO: answer here
+	expirationTime := time.Now().Add(time.Minute * 60)
+	claims := &Claims{
+		Username: *res,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expirationTime.Unix(),
+		},
+	}
 
 	// Task: Buat token menggunakan encoded claim dengan salah satu algoritma yang dipakai
 
 	// TODO: answer here
-
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	
 	// Task: 1. Buat jwt string dari token yang sudah dibuat menggunakan JWT key yang telah dideklarasikan
 	//       2. return internal error ketika ada kesalahan ketika pembuatan JWT string
 
 	// TODO: answer here
+	tokenString, err := token.SignedString(jwtKey)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(AuthErrorResponse{Error: err.Error()})
+		return
+	}
 
 	// Task: Set token string kedalam cookie response
 
 	// TODO: answer here
+	var cookie = http.Cookie{}
+	cookie.Name = "token"
+	cookie.Value = tokenString
+	cookie.Expires = expirationTime
+	http.SetCookie(w, &cookie)
 
 	// Task: Return response berupa username yang sudah login
-
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: ""}) // TODO: replace this
->>>>>>> c0397392214e368e84db7e7b9a1534ca43781bfb
+	// TODO: answer here
+	encoder.Encode(LoginSuccessResponse{Username: *res})
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
