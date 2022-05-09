@@ -29,21 +29,30 @@ func NewAPI(usersRepo repository.UserRepository, productsRepo repository.Product
 	// mux.HandleFunc("/api/cart/clear", api.clearCart)
 	// mux.HandleFunc("/api/carts", api.cartList)
 
+	// API with AuthMiddleware:
 	mux.Handle("/api/dashboard", api.AuthMiddleWare(http.HandlerFunc(api.dashboard)))
 	mux.Handle("/api/products", api.AuthMiddleWare(http.HandlerFunc(api.productList)))
 	mux.Handle("/api/cart/add", api.AuthMiddleWare(http.HandlerFunc(api.addToCart)))
 	mux.Handle("/api/cart/clear", api.AuthMiddleWare(http.HandlerFunc(api.clearCart)))
 	mux.Handle("/api/carts", api.AuthMiddleWare(http.HandlerFunc(api.cartList)))
+<<<<<<< HEAD
 
 	// TODO: answer here
+=======
+>>>>>>> 4772a32b3403c338baf54967064bd8557b10e6eb
 
 	// mux.HandleFunc("/api/dashboard", api.dashboard)
 	// mux.HandleFunc("/api/products", api.productList)
 	// mux.HandleFunc("/api/cart/add", api.addToCart)
 	// mux.HandleFunc("/api/cart/clear", api.clearCart)
+<<<<<<< HEAD
 
 	// TODO: answer here
 	
+=======
+	// mux.HandleFunc("/api/cart/clear", api.clearCart)
+	// mux.HandleFunc("/api/carts", api.cartList)
+>>>>>>> 4772a32b3403c338baf54967064bd8557b10e6eb
 
 	return api
 }

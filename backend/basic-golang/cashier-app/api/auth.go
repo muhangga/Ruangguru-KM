@@ -10,6 +10,7 @@ import (
 
 type LoginSuccessResponse struct {
 	Username string `json:"username"`
+	Token    string `json:"token"`
 }
 
 type AuthErrorResponse struct {
@@ -78,9 +79,15 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 	cookie.Expires = expirationTime
 	http.SetCookie(w, &cookie)
 
+<<<<<<< HEAD
 	// Task: Return response berupa username yang sudah login
 	// TODO: answer here
 	encoder.Encode(LoginSuccessResponse{Username: *res})
+=======
+	// Task: Return response berupa username dan token JWT yang sudah login
+
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Username: "", Token: ""}) // TODO: replace this
+>>>>>>> 4772a32b3403c338baf54967064bd8557b10e6eb
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
