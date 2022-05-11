@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	vegeta "github.com/tsenart/vegeta/v12/lib"
@@ -12,6 +13,16 @@ import (
 func vegetaGet(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := time.Second * 2
+	frequency := 10
+	rate := vegeta.Rate{Freq: frequency, Per: time.Second}
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "GET",
+		URL:    target,
+	})
+	metrics = vegetaAttack(targeter, rate, duration)
+	
 	return metrics
 }
 
@@ -21,6 +32,18 @@ func vegetaGet(target string) *vegeta.Metrics {
 func vegetaPost(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	duration := time.Second * 2
+	frequency := 15
+	rate := vegeta.Rate{Freq: frequency, Per: time.Second}
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "POST",
+		URL:    target,
+	})
+	metrics = vegetaAttack(targeter, rate, duration)
+	fmt.Println(metrics.StatusCodes)
+	fmt.Println(metrics.Latencies.Max)
+
 	return metrics
 }
 

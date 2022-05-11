@@ -1,7 +1,7 @@
 package main
 
 import (
-	"encoding/json"
+	// "encoding/json"
 	// TODO: answer here
 	"time"
 
@@ -24,6 +24,16 @@ type Movie struct {
 func addMovieTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	frequency := 10
+	duration := time.Second * 1
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "POST",
+		URL:    target + "/movie",
+		Body:   []byte(`{"episode": 1, "name": "The Phantom Menace"}`),
+	})
+
+	metrics = vegetaAttack(targeter, frequency, duration)
 	return metrics
 }
 
@@ -33,6 +43,15 @@ func addMovieTest(target string) *vegeta.Metrics {
 func getMovieTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	frequency := 25
+	duration := time.Second * 1
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "GET",
+		URL:    target + "/movie/1",
+	})
+
+	metrics = vegetaAttack(targeter, frequency, duration)
 	return metrics
 }
 
@@ -40,6 +59,15 @@ func getMovieTest(target string) *vegeta.Metrics {
 func getMoviesTest(target string) *vegeta.Metrics {
 	metrics := &vegeta.Metrics{}
 	// TODO: answer here
+	frequency := 20
+	duration := time.Second * 1
+
+	targeter := vegeta.NewStaticTargeter(vegeta.Target{
+		Method: "GET",
+		URL:    target + "/movies",
+	})
+
+	metrics = vegetaAttack(targeter, frequency, duration)
 	return metrics
 }
 
