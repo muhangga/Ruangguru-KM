@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	// "golang.org/x/crypto/bcrypt"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func main() {
@@ -18,5 +18,6 @@ func main() {
 // encrypt string kedalam bcrypt
 func encryptToBcrypt(str string) (string, error) {
 	// Task: Hashing the password with the default cost of 10
-	return "", nil // TODO: replace this
+	hashedStr, _ := bcrypt.GenerateFromPassword([]byte(str), bcrypt.DefaultCost)
+	return string(hashedStr), nil
 }

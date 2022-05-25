@@ -59,3 +59,4 @@ func vegetaAttackIncreaseBySecond(targeter vegeta.Targeter, rate vegeta.Constant
 	metrics.Close()
 	return &metrics
 }
+

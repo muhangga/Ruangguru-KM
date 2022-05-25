@@ -34,8 +34,21 @@ func (db *EmployeeDB) Insert(name string, position string, salary int, managerID
 
 func (db *EmployeeDB) Update(id int, name string, position string, salary int, managerID int) {
 	// TODO: answer here
+	employee := db.Where(id)
+
+	employee.Name = name
+	employee.Position = position
+	employee.Salary = salary
+	employee.ManagerID = managerID
+
 }
 
 func (db *EmployeeDB) Delete(id int) {
 	// TODO: answer here
+	for i, employee := range *db {
+		if employee.ID == id {
+			*db = append((*db)[:i], (*db)[i+1:]...)
+			break
+		}
+	}
 }

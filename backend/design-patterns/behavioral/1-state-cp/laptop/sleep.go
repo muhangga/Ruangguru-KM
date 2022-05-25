@@ -14,4 +14,5 @@ func (s Sleeping) CanTurnOnLaptop() bool {
 
 func (s Sleeping) Sleep() {
 	// TODO: answer here
+	return
 }

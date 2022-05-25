@@ -16,6 +16,24 @@ var err error
 
 var handler http.HandlerFunc = func(w http.ResponseWriter, r *http.Request) {
 	// TODO: answer here
+	if r.Method != "GET" {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		return
+	}
+
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	if len(data) == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte(fmt.Sprintf("Data: %s", data)))
+
 }
 
 func main() {
